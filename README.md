@@ -4,7 +4,7 @@ Part of my React learning exercise, this is a user list table that expects name,
 
 ## Demo
   - `npm install` and then `npm start` locally,
-  - or go to [igorlanko.github.io/manage-users-react](igorlanko.github.io/manage-users-react).
+  - or go to [igorlanko.github.io/manage-users-react](https://igorlanko.github.io/manage-users-react).
 
 ## How to publish
 - `npm run predeploy` will build the app;
