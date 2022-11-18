@@ -42,11 +42,11 @@ function App() {
 	}
 
 	return (
-		<article className='userslist container mx-auto p-3'>
+		<article className='userslist max-w-md mx-auto p-3'>
 			{isAddingUser && (
 				<NewUser
 					onSaveUserData={onSaveUserDataHandler}
-					UserData={onSaveUserDataHandler}
+					userData={onSaveUserDataHandler}
 					onCancel={closeAddNewUser}
 				/>
 			)}
