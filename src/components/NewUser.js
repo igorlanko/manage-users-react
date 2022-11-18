@@ -1,27 +1,22 @@
-import { useState } from "react"
+import { useState, useRef } from "react"
 import Modal from "./Modal"
 import TextInput from "./TextInput"
 import Button from "./Button"
 
 function NewUser(props) {
-	const [enteredName, setEnteredName] = useState("")
-	const [enteredEmail, setEnteredEmail] = useState("")
+	const nameInputRef = useRef()
+	const emailInputRef = useRef()
+
 	const [error, setError] = useState("")
-
-	function nameEnterHandler(event) {
-		setEnteredName(event.target.value)
-	}
-
-	function emailEnterHandler(event) {
-		setEnteredEmail(event.target.value)
-	}
 
 	function formSubmitHandler(event) {
 		event.preventDefault()
+		const enteredUserName = nameInputRef.current.value
+		const enteredUserEmail = emailInputRef.current.value
 
 		if (
-			enteredName.trim().length === 0 ||
-			enteredEmail.trim().length === 0
+			enteredUserName.trim().length === 0 ||
+			enteredUserEmail.trim().length === 0
 		) {
 			setError({
 				title: "Can't submit empty form",
@@ -32,14 +27,16 @@ function NewUser(props) {
 
 		const userData = {
 			id: Math.random().toString(),
-			name: enteredName,
-			email: enteredEmail,
+			name: enteredUserName,
+			email: enteredUserEmail,
 			date: "just now",
 		}
 
 		props.onSaveUserData(userData)
-		setEnteredEmail("")
-		setEnteredEmail("")
+
+		// shouldn't be used normally, consider useState() hook instead to reset
+		nameInputRef.current.value = ""
+		emailInputRef.current.value = ""
 	}
 
 	function errorHandler() {
@@ -57,19 +54,17 @@ function NewUser(props) {
 		>
 			<form onSubmit={formSubmitHandler}>
 				<fieldset>
-					<TextInput
+					<input
 						label='Name'
 						placeholder='Volodya Sr'
 						type='text'
-						onChange={nameEnterHandler}
-						value={enteredName}
+						ref={nameInputRef}
 					/>
-					<TextInput
+					<input
 						label='Email'
 						placeholder='volodya@email.com'
 						type='email'
-						onChange={emailEnterHandler}
-						value={enteredEmail}
+						ref={emailInputRef}
 					/>
 				</fieldset>
 				<div className='flex flex-col gap-y-2 mt-4'>

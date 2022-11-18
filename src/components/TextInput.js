@@ -8,6 +8,7 @@ function TextInput(props) {
 				value={props.value}
 				placeholder={props.placeholder}
 				onChange={props.onChange}
+				ref={props.ref}
 			/>
 		</div>
 	)
